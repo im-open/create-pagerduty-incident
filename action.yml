@@ -1,18 +1,22 @@
-name: 'JavaScript Action Template'
+name: 'create-pagerduty-incident'
 
-description: 'Add description here'
-
+description: 'An action that will create a PagerDuty incident.'
 inputs:
-  input-1:
-    description: 'Add a description here'
+  pagerduty-api-key:
+    description: 'The PagerDuty API Key that allows access to your services.'
     required: true
-  input-2:
-    description: 'Add a description here'
+  email:
+    description: 'The email address of a valid PagerDuty user on the account associated with the auth token.'
     required: false
-
-outputs:
-  output-1:
-    description: 'Add a description here'
+  service-id:
+    description: 'The PagerDuty Service ID to create the incident for.'
+    required: true
+  title:
+    description: 'The title of the PagerDuty Incident that will be created. '
+    required: true
+  body:
+    description: 'The body of the PagerDuty Incident that will be created.'
+    required: false
 
 runs:
   using: 'node12'

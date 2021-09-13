@@ -1,84 +1,51 @@
-# javascript-action-template
+# create-pagerduty-incident
 
-This template can be used to quickly start a new custom js action repository.  Click the `Use this template` button at the top to get started.
-
-## TODOs
-- Readme
-  - [ ] Update the Inputs section with the correct action inputs
-  - [ ] Update the Outputs section with the correct action outputs
-  - [ ] Update the Usage Example section with the correct usage   
-- package.json
-  - [ ] Update the `name` with the new action value
-- src/main.js
-  - [ ] Implement your custom javascript action
-- action.yml
-  - [ ] Fill in the correct name, description, inputs and outputs
-- .prettierrc.json
-  - [ ] Update any preferences you might have
-- CODEOWNERS
-  - [ ] Update as appropriate
-- Repository Settings
-  - [ ] On the *Options* tab check the box to *Automatically delete head branches*
-  - [ ] On the *Options* tab update the repository's visibility (must be done by an org owner)
-  - [ ] On the *Branches* tab add a branch protection rule
-    - [ ] Check *Require pull request reviews before merging*
-    - [ ] Check *Dismiss stale pull request approvals when new commits are pushed*
-    - [ ] Check *Require review from Code Owners*
-    - [ ] Check *Include Administrators*
-  - [ ] On the *Manage Access* tab add the appropriate groups
-- About Section (accessed on the main page of the repo, click the gear icon to edit)
-  - [ ] The repo should have a short description of what it is for
-  - [ ] Add one of the following topic tags:
-    | Topic Tag       | Usage                                    |
-    | --------------- | ---------------------------------------- |
-    | az              | For actions related to Azure             |
-    | code            | For actions related to building code     |
-    | certs           | For actions related to certificates      |
-    | db              | For actions related to databases         |
-    | git             | For actions related to Git               |
-    | iis             | For actions related to IIS               |
-    | microsoft-teams | For actions related to Microsoft Teams   |
-    | svc             | For actions related to Windows Services  |
-    | jira            | For actions related to Jira              |
-    | meta            | For actions related to running workflows |
-    | pagerduty       | For actions related to PagerDuty         |
-    | test            | For actions related to testing           |
-    | tf              | For actions related to Terraform         |
-  - [ ] Add any additional topics for an action if they apply    
-  - [ ] The Packages and Environments boxes can be unchecked
-    
+This action will create a PagerDuty incident.  Only one service can be targeted at a time.
 
 ## Inputs
-| Parameter | Is Required | Default | Description           |
-| --------- | ----------- | ------- | --------------------- |
-| `input-1` | true        |         | Description goes here |
-| `input-2` | false       |         | Description goes here |
+| Parameter           | Is Required | Description                                                                                |
+| ------------------- | ----------- | ------------------------------------------------------------------------------------------ |
+| `pagerduty-api-key` | true        | The PagerDuty API Key that allows access to your services.                                 |
+| `email`             | true        | The email address of a valid PagerDuty user on the account associated with the auth token. |
+| `service-id`        | true        | The PagerDuty Service ID to create the incident for.                                       |
+| `title`             | true        | The title of the PagerDuty Incident that will be created.                                  |
+| `body`              | false       | The body of the PagerDuty Incident that will be created.                                   |
 
 ## Outputs
-| Output     | Description           |
-| ---------- | --------------------- |
-| `output-1` | Description goes here |
+No outputs
 
-## Usage Examples
+
+## Example
 
 ```yml
-# TODO: Fill in the correct usage
-jobs:
-  job1:
-    runs-on: ubuntu-20.04
+  jobs:
+    validate-deployed-code:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Add Step Here
-        uses: im-open/this-repo@v1.0.0
+      - id: deployed-checksum
+        run: ./generate-checksum-against-deployed-code.sh
+
+      - id: compare-checksums
+        run: ./compare-checksums -deployedChecksum ${{ steps.deployed-checksum.outputs.CHECKSUM }}
+
+      - name: Create a PagerDuty Incident
+        if: steps.compare-checksums.outputs.MATCH == 'false'
+        uses: im-open/create-pagerduty-incident@v1.0.0
         with:
-          input-1: 'abc'
-          input-2: '123
+          pagerduty-api-key: ${{secrets.PAGERDUTY_API_KEY}}
+          email: bob@office.com
+          service-id: 'P0ABCDE'
+          title: 'The deployed code does not match the expected version'
+          body: 'Find more information at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+      
 ```
 
 ## Recompiling
 
-If changes are made to the action's code in this repository, or its dependencies, you will need to re-compile the action.
+If changes are made to the action's code in this repository, or its dependencies, you will need to re-compile the
+action.
 
 ```sh
 # Installs dependencies and bundles the code
