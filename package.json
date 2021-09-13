@@ -20,7 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "@actions/core": "^1.2.7",
-    "axios": "^0.21.1"
+    "axios": "^0.21.2"
   },
   "devDependencies": {
     "esbuild": "^0.12.8",
