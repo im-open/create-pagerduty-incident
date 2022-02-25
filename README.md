@@ -43,7 +43,7 @@ No outputs
 
       - name: Create a PagerDuty Incident
         if: steps.compare-checksums.outputs.MATCH == 'false'
-        uses: im-open/create-pagerduty-incident@v1.0.4
+        uses: im-open/create-pagerduty-incident@v1.0.5
         with:
           pagerduty-api-key: ${{secrets.PAGERDUTY_API_KEY}}
           email: bob@office.com
