@@ -33,7 +33,7 @@ No outputs
     validate-deployed-code:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - id: deployed-checksum
         run: ./generate-checksum-against-deployed-code.sh
