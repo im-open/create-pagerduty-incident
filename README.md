@@ -33,7 +33,7 @@ No outputs
     validate-deployed-code:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - id: deployed-checksum
         run: ./generate-checksum-against-deployed-code.sh
@@ -43,7 +43,7 @@ No outputs
 
       - name: Create a PagerDuty Incident
         if: steps.compare-checksums.outputs.MATCH == 'false'
-        uses: im-open/create-pagerduty-incident@v1.0.7
+        uses: im-open/create-pagerduty-incident@v1.1.0
         with:
           pagerduty-api-key: ${{secrets.PAGERDUTY_API_KEY}}
           email: bob@office.com
