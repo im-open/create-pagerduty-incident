@@ -4602,9 +4602,9 @@ try {
       core.info('The incident was successfully created:');
     })
     .catch(function (error) {
-      core.setFailed(`An error occurred creating the incident: ${error}`);
+      core.setFailed(`An error occurred creating the incident: ${error.message}`);
       return;
     });
 } catch (error) {
-  core.setFailed(`An error occurred while creating the incident: ${error}`);
+  core.setFailed(`An error occurred while creating the incident: ${error.message}`);
 }
