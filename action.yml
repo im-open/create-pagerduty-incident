@@ -18,6 +18,12 @@ inputs:
     description: 'The body of the PagerDuty Incident that will be created.'
     required: false
 
+outputs:
+  incident-id:
+    description: 'The ID of the incident that was just created.'
+  pagerduty-error-code:
+    description: 'The status code of the PagerDuty API request if it returns an error.'
+
 runs:
   using: 'node16'
   main: 'dist/index.js'
