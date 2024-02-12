@@ -25,10 +25,14 @@ This action will create a PagerDuty incident.  Only one service can be targeted 
 | `service-id`        | true        | The PagerDuty Service ID to create the incident for.                                       |
 | `title`             | true        | The title of the PagerDuty Incident that will be created.                                  |
 | `body`              | false       | The body of the PagerDuty Incident that will be created.                                   |
+| `urgency`           | false       | The urgency of the incident.  Accepts: `high` or `low`.  Defaults to `high`.               |
 
 ## Outputs
 
-No outputs
+| Output               | Description                                                          |
+|----------------------|----------------------------------------------------------------------|
+| incident-id          | The ID of the PagerDuty Incident that was just created.              |
+| pagerduty-error-code | The status code of the PagerDuty API request if it returns an error. |
 
 ## Usage Examples
 
@@ -48,7 +52,7 @@ No outputs
       - name: Create a PagerDuty Incident
         if: steps.compare-checksums.outputs.MATCH == 'false'
         # You may also reference the major or major.minor version
-        uses: im-open/create-pagerduty-incident@v1.1.3
+        uses: im-open/create-pagerduty-incident@v1.2.0
         with:
           pagerduty-api-key: ${{secrets.PAGERDUTY_API_KEY}}
           email: bob@office.com

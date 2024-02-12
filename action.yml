@@ -7,7 +7,7 @@ inputs:
     required: true
   email:
     description: 'The email address of a valid PagerDuty user on the account associated with the auth token.'
-    required: false
+    required: true
   service-id:
     description: 'The PagerDuty Service ID to create the incident for.'
     required: true
@@ -17,6 +17,16 @@ inputs:
   body:
     description: 'The body of the PagerDuty Incident that will be created.'
     required: false
+  urgency:
+    description: 'The urgency of the incident.  Accepts: high or low.  Defaults to high.'
+    required: false
+    default: high
+
+outputs:
+  incident-id:
+    description: 'The ID of the incident that was just created.'
+  pagerduty-error-code:
+    description: 'The status code of the PagerDuty API request if it returns an error.'
 
 runs:
   using: 'node16'
