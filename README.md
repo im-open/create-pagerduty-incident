@@ -25,6 +25,7 @@ This action will create a PagerDuty incident.  Only one service can be targeted 
 | `service-id`        | true        | The PagerDuty Service ID to create the incident for.                                       |
 | `title`             | true        | The title of the PagerDuty Incident that will be created.                                  |
 | `body`              | false       | The body of the PagerDuty Incident that will be created.                                   |
+| `urgency`           | false       | The urgency of the incident.  Accepts: `high` or `low`.  Defaults to `high`.               |
 
 ## Outputs
 

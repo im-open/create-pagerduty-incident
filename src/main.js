@@ -11,6 +11,7 @@ const email = core.getInput('email', requiredArgOptions);
 const serviceId = core.getInput('service-id', requiredArgOptions);
 const title = core.getInput('title', requiredArgOptions);
 const body = core.getInput('body');
+const urgency = core.getInput('urgency');
 
 core.info(`Creating PagerDuty Incident for: ${title}`);
 
@@ -21,7 +22,8 @@ let incidentDetails = {
     service: {
       id: serviceId,
       type: 'service'
-    }
+    },
+    urgency: urgency
   }
 };
 if (body && body.length > 0) {

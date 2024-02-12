@@ -4569,6 +4569,7 @@ var email = core.getInput('email', requiredArgOptions);
 var serviceId = core.getInput('service-id', requiredArgOptions);
 var title = core.getInput('title', requiredArgOptions);
 var body = core.getInput('body');
+var urgency = core.getInput('urgency');
 core.info(`Creating PagerDuty Incident for: ${title}`);
 var incidentDetails = {
   incident: {
@@ -4577,7 +4578,8 @@ var incidentDetails = {
     service: {
       id: serviceId,
       type: 'service'
-    }
+    },
+    urgency
   }
 };
 if (body && body.length > 0) {
