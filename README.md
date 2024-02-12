@@ -52,7 +52,7 @@ This action will create a PagerDuty incident.  Only one service can be targeted 
       - name: Create a PagerDuty Incident
         if: steps.compare-checksums.outputs.MATCH == 'false'
         # You may also reference the major or major.minor version
-        uses: im-open/create-pagerduty-incident@v1.2.1
+        uses: im-open/create-pagerduty-incident@v1.2.2
         with:
           pagerduty-api-key: ${{secrets.PAGERDUTY_API_KEY}}
           email: bob@office.com
