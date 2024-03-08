@@ -52,7 +52,7 @@ This action will create a PagerDuty incident.  Only one service can be targeted 
       - name: Create a PagerDuty Incident
         if: steps.compare-checksums.outputs.MATCH == 'false'
         # You may also reference the major or major.minor version
-        uses: im-open/create-pagerduty-incident@v1.2.2
+        uses: im-open/create-pagerduty-incident@v1.3.0
         with:
           pagerduty-api-key: ${{secrets.PAGERDUTY_API_KEY}}
           email: bob@office.com
@@ -110,7 +110,7 @@ This project has adopted the [im-open's Code of Conduct](https://github.com/im-o
 
 ## License
 
-Copyright &copy; 2023, Extend Health, LLC. Code released under the [MIT license](LICENSE).
+Copyright &copy; 2024, Extend Health, LLC. Code released under the [MIT license](LICENSE).
 
 <!-- Links -->
 [Incrementing the Version]: #incrementing-the-version

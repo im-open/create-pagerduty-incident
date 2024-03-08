@@ -29,5 +29,5 @@ outputs:
     description: 'The status code of the PagerDuty API request if it returns an error.'
 
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
